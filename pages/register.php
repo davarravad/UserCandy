@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         if (register_user($email, $password)) {
+            set_flash('success', 'Registration successful');
             header('Location: ' . base_url('login'));
             exit;
         } else {
