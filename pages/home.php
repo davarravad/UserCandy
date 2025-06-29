@@ -1,12 +1,8 @@
-<?php include __DIR__ . '/../core/init.php'; ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
-    <title>Home</title>
-</head>
-<body>
-<h1>Welcome to UserCandy Framework</h1>
-<p><a href="<?php echo base_url('login'); ?>">Login</a> or <a href="<?php echo base_url('register'); ?>">Register</a></p>
-</body>
-</html>
+<?php include __DIR__ . '/../core/init.php';
+$meta['title'] = 'Home';
+include __DIR__ . '/../templates/header.php';
+?>
+<h1 class="text-2xl font-bold mb-4">Welcome to UserCandy Framework</h1>
+<p><a class="text-blue-700" href="<?php echo base_url('login'); ?>">Login</a> or <a class="text-blue-700" href="<?php echo base_url('register'); ?>">Register</a></p>
+<?php include __DIR__ . '/../templates/footer.php';
+return; ?>

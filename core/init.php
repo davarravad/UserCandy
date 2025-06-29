@@ -1,6 +1,19 @@
 <?php
 
-$config = require __DIR__ . '/../app/config.php';
+$configPath = __DIR__ . '/../app/config.php';
+if (!file_exists($configPath)) {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
+    echo "<title>Setup Required</title>";
+    echo "<link href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' rel='stylesheet'>";
+    echo "</head><body class='p-4 font-sans'>";
+    echo "<h1 class='text-2xl font-bold mb-4'>Configuration Missing</h1>";
+    echo "<p>Copy <code>app/default-config.php</code> to <code>app/config.php</code> and update your database settings.</p>";
+    echo "</body></html>";
+    exit;
+}
+
+$config = require $configPath;
 
 // Database connection
 try {

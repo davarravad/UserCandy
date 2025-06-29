@@ -20,8 +20,11 @@ UserCandy is a simple PHP/MySQL website framework with optional Node.js support.
 3. Serve the `public` directory as your web root so requests are handled by `public/index.php`.
 4. (Optional) Run `npm install` and `node server.js` to start the Node server.
 
+If `app/config.php` is missing, the framework will display a setup message instead of crashing.
+
 ## Customization
 Add or modify pages in the `app/pages` directory. Files in this folder override files in `pages` with the same name, allowing upgrades without overwriting custom code.
+The templates in the `templates` directory load a header and footer using Tailwind CSS for styling.
 
 ## OAuth Login
 Enable Google, Discord, or Windows login by setting the appropriate flags and credentials in `app/config.php`.
@@ -36,3 +39,6 @@ setting `enable_recaptcha` to `true` and providing your site and secret keys.
 - `/profile/{id}` – Public user profile by ID
 
 Enjoy building with UserCandy!
+
+## AJAX User Table
+An example dynamic table is available at `/users`. It loads data with jQuery and allows inline editing by double-clicking cells. Edits are saved automatically.

@@ -6,15 +6,12 @@ if (!$user) {
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
-    <title>Dashboard</title>
-</head>
-<body>
-<h1>Dashboard</h1>
+<?php
+$meta['title'] = 'Dashboard';
+include __DIR__ . '/../templates/header.php';
+?>
+<h1 class="text-2xl font-bold mb-4">Dashboard</h1>
 <p>Welcome <?php echo htmlspecialchars($user['email']); ?>!</p>
-<p><a href="<?php echo base_url('logout'); ?>">Logout</a></p>
-</body>
-</html>
+<p><a class="text-blue-700" href="<?php echo base_url('logout'); ?>">Logout</a></p>
+<?php include __DIR__ . '/../templates/footer.php';
+return; ?>

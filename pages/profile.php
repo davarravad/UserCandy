@@ -16,14 +16,11 @@ if (!$profileUser) {
     return;
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
-    <title>Profile</title>
-</head>
-<body>
-<h1>Profile for <?php echo htmlspecialchars($profileUser['email']); ?></h1>
+<?php
+$meta['title'] = 'Profile';
+include __DIR__ . '/../templates/header.php';
+?>
+<h1 class="text-2xl font-bold mb-4">Profile for <?php echo htmlspecialchars($profileUser['email']); ?></h1>
 <p>User ID: <?php echo $profileUser['id']; ?></p>
-</body>
-</html>
+<?php include __DIR__ . '/../templates/footer.php';
+return; ?>
