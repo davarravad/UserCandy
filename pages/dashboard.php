@@ -5,6 +5,7 @@ if (!$user) {
     header('Location: ' . base_url('login'));
     exit;
 }
+add_notification('Visit your profile', base_url('profile/' . $user['id']));
 ?>
 <?php
 $meta['title'] = 'Dashboard';

@@ -1,5 +1,34 @@
 console.log('UserCandy JS loaded');
+
+window.showPopup = function(message, type){
+  var popup = $('<div>').addClass('px-4 py-2 rounded text-white shadow');
+  popup.text(message);
+  popup.addClass(type === 'success' ? 'bg-green-500' : 'bg-red-500');
+  $('#popup-container').append(popup);
+  setTimeout(function(){ popup.fadeOut(400, function(){ $(this).remove(); }); }, 5000);
+};
+
+function toggleTheme(){
+  if($('html').hasClass('dark')){
+    $('html').removeClass('dark');
+    $('#theme-toggle').html('&#9728;');
+  }else{
+    $('html').addClass('dark');
+    $('#theme-toggle').html('&#9790;');
+  }
+  localStorage.setItem('uc_theme', $('html').hasClass('dark') ? 'dark' : 'light');
+}
+
 $(function(){
+  if(localStorage.getItem('uc_theme') === 'dark'){
+    $('html').addClass('dark');
+    $('#theme-toggle').html('&#9790;');
+  }
+  $('#theme-toggle').on('click', toggleTheme);
+
+  $('#user-avatar').on('click', function(){ $('#user-menu').toggleClass('hidden'); });
+  $('#notif-bell').on('click', function(){ $('#notif-menu').toggleClass('hidden'); });
+
   if($('#user-table').length){
     function loadUsers(){
       $('#loading').text('Loading...');

@@ -29,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $meta['title'] = 'Login';
 include __DIR__ . '/../templates/header.php';
 ?>
+<?php $flash = get_flash('success'); if ($flash): ?>
+<script>$(function(){ showPopup('<?php echo addslashes($flash); ?>', 'success'); });</script>
+<?php endif; ?>
 <h1 class="text-2xl font-bold mb-4">Login</h1>
 <?php if (!empty($error)) echo '<p class="text-red-500">' . $error . '</p>'; ?>
 <form method="post" class="space-y-2">

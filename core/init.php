@@ -88,6 +88,19 @@ if (!file_exists($configPath)) {
 
 $config = require $configPath;
 
+// Language loading
+$langCode = $_GET['lang'] ?? $_SESSION['lang'] ?? $config['language'];
+if (!in_array($langCode, $config['available_languages'])) {
+    $langCode = $config['language'];
+}
+$_SESSION['lang'] = $langCode;
+$langFile = __DIR__ . '/../languages/' . $langCode . '.php';
+if (file_exists($langFile)) {
+    $lang = require $langFile;
+} else {
+    $lang = [];
+}
+
 // Database connection
 try {
     $db = new PDO(
@@ -102,9 +115,18 @@ try {
 
 session_start();
 
+require_once __DIR__ . '/notify.php';
+
 if (!function_exists('base_url')) {
     function base_url($path = '') {
         global $config;
         return rtrim($config['base_url'], '/') . '/' . ltrim($path, '/');
+    }
+}
+
+if (!function_exists('__')) {
+    function __($key) {
+        global $lang;
+        return $lang[$key] ?? $key;
     }
 }

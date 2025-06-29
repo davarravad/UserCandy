@@ -23,4 +23,8 @@ return [
     'enable_recaptcha' => false,
     'recaptcha_site_key' => '',
     'recaptcha_secret_key' => '',
+
+    // Language settings
+    'language' => 'en', // default language code
+    'available_languages' => ['en', 'de'],
 ];
