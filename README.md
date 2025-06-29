@@ -8,7 +8,7 @@ UserCandy is a simple PHP/MySQL website framework with optional Node.js support.
 - Node.js (optional for running `server.js`)
 
 ## Installation
-1. Copy `core/config.sample.php` to `app/config.php` and update your database credentials and OAuth settings.
+1. Copy `app/default-config.php` to `app/config.php` and update your database credentials and OAuth settings.
 2. Create a MySQL database and run the following to create the users table:
    ```sql
    CREATE TABLE users (

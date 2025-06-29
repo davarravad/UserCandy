@@ -1,4 +1,7 @@
 <?php
+// Default configuration template.
+// Rename this file to config.php and customize your settings.
+
 return [
     'db' => [
         'host' => 'localhost',
