@@ -11,26 +11,42 @@ if (!is_dir($logDir)) {
 }
 $logFile = $logDir . '/error.log';
 
-function uc_log_error($message) {
-    global $logFile;
-    error_log('[' . date('Y-m-d H:i:s') . '] ' . $message . PHP_EOL, 3, $logFile);
+if (!function_exists('uc_log_error')) {
+    function uc_log_error($message) {
+        global $logFile;
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        array_shift($trace); // remove this function from trace
+        $stackInfo = '';
+        if (!empty($trace)) {
+            foreach ($trace as $t) {
+                $file = $t['file'] ?? '[internal function]';
+                $line = $t['line'] ?? '';
+                $func = $t['function'] ?? '';
+                $stackInfo .= "$file:$line $func\n";
+            }
+        }
+        $logMessage = '[' . date('Y-m-d H:i:s') . '] ' . $message;
+        if ($stackInfo) {
+            $logMessage .= "\nStack trace:\n" . rtrim($stackInfo);
+        }
+        error_log($logMessage . PHP_EOL, 3, $logFile);
+    }
 }
 
-function uc_error_page($message = '') {
-    $home = htmlspecialchars(base_url());
-    header('Content-Type: text/html; charset=UTF-8');
-    echo "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
-    echo "<title>UserCandy Framework - Error</title>";
-    echo "<link href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' rel='stylesheet'>";
-    echo "</head><body class='p-4 font-sans'>";
-    echo "<h1 class='text-2xl font-bold mb-4'>UserCandy Framework - Error</h1>";
-    echo "<p>An unexpected error occurred and has been logged for the administrator.</p>";
-    if ($message) {
-        echo "<pre class='bg-gray-100 p-2 mt-2 overflow-x-auto'>" . htmlspecialchars($message) . "</pre>";
+if (!function_exists('uc_error_page')) {
+    function uc_error_page($message = '') {
+        $home = htmlspecialchars(base_url());
+        header('Content-Type: text/html; charset=UTF-8');
+        echo "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
+        echo "<title>UserCandy Framework - Error</title>";
+        echo "<link href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' rel='stylesheet'>";
+        echo "</head><body class='p-4 font-sans'>";
+        echo "<h1 class='text-2xl font-bold mb-4'>UserCandy Framework - Error</h1>";
+        echo "<p>An unexpected error occurred and has been logged for the administrator to research.</p>";
+        echo "<a href='{$home}' class='text-blue-700'>Go Home</a>";
+        echo "</body></html>";
+        exit;
     }
-    echo "<a href='{$home}' class='text-blue-700'>Go Home</a>";
-    echo "</body></html>";
-    exit;
 }
 
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
@@ -86,7 +102,9 @@ try {
 
 session_start();
 
-function base_url($path = '') {
-    global $config;
-    return rtrim($config['base_url'], '/') . '/' . ltrim($path, '/');
+if (!function_exists('base_url')) {
+    function base_url($path = '') {
+        global $config;
+        return rtrim($config['base_url'], '/') . '/' . ltrim($path, '/');
+    }
 }
