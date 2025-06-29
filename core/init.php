@@ -1,6 +1,10 @@
 <?php
 
-$config = require __DIR__ . '/../app/config.php';
+$configFile = __DIR__ . '/../app/config.php';
+if (!file_exists($configFile)) {
+    die('Please rename app/default-config.php to app/config.php and update your settings.');
+}
+$config = require $configFile;
 
 // Database connection
 try {
