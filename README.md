@@ -25,6 +25,8 @@ Add or modify pages in the `app/pages` directory. Files in this folder override 
 
 ## OAuth Login
 Enable Google, Discord, or Windows login by setting the appropriate flags and credentials in `app/config.php`.
+You may also enable Google reCAPTCHA on the login and registration forms by
+setting `enable_recaptcha` to `true` and providing your site and secret keys.
 
 ## Default Pages
 - `/` – Home
