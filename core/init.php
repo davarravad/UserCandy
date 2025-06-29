@@ -35,7 +35,7 @@ if (!function_exists('uc_log_error')) {
 
 if (!function_exists('uc_error_page')) {
     function uc_error_page($message = '') {
-        $home = htmlspecialchars(base_url());
+        $home = function_exists('base_url') ? htmlspecialchars(base_url()) : '/';
         header('Content-Type: text/html; charset=UTF-8');
         echo "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
         echo "<title>UserCandy Framework - Error</title>";
@@ -87,6 +87,10 @@ if (!file_exists($configPath)) {
 }
 
 $config = require $configPath;
+
+// Provide sane defaults if optional keys are missing
+$config['language'] = $config['language'] ?? 'en';
+$config['available_languages'] = $config['available_languages'] ?? ['en'];
 
 // Language loading
 $langCode = $_GET['lang'] ?? $_SESSION['lang'] ?? $config['language'];
