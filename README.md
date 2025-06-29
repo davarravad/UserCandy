@@ -1,11 +1,10 @@
 # UserCandy Framework
 
-UserCandy is a simple PHP/MySQL website framework with optional Node.js support. It provides a basic login system, routing, and default pages that can be customized without modifying the core.
+UserCandy is a simple PHP/MySQL website framework. It provides a basic login system, routing, and default pages that can be customized without modifying the core.
 
 ## Requirements
 - PHP 7.4+
 - MySQL
-- Node.js (optional for running `server.js`)
 
 ## Installation
 1. Copy `app/default-config.php` to `app/config.php` and update your database credentials and OAuth settings.
@@ -18,7 +17,6 @@ UserCandy is a simple PHP/MySQL website framework with optional Node.js support.
    );
    ```
 3. Serve the `public` directory as your web root so requests are handled by `public/index.php`.
-4. (Optional) Run `npm install` and `node server.js` to start the Node server.
 
 If `app/config.php` is missing, the framework will display a setup message instead of crashing.
 

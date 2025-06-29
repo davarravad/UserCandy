@@ -12,8 +12,9 @@ if (!isset($meta['title'])) { $meta['title'] = 'UserCandy'; }
 </head>
 <body class="p-4">
     <nav class="mb-4 flex items-center justify-between">
-        <div class="text-xl font-bold">
-            <?php echo __('site_name'); ?>
+        <div class="flex items-center space-x-2">
+            <img src="<?php echo base_url('images/userCandyLogo.png'); ?>" alt="UserCandy" class="h-8" />
+            <span class="text-xl font-bold"><?php echo __('site_name'); ?></span>
         </div>
         <ul class="flex space-x-4">
             <li><a class="text-blue-700" href="<?php echo base_url(); ?>"><?php echo __('home'); ?></a></li>
