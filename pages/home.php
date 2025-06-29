@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="<?php echo base_url('public/css/style.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>">
     <title>Home</title>
 </head>
 <body>

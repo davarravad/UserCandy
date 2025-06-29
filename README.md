@@ -17,7 +17,7 @@ UserCandy is a simple PHP/MySQL website framework with optional Node.js support.
      password VARCHAR(255) NOT NULL
    );
    ```
-3. Serve the project with your preferred web server pointing to `index.php`.
+3. Serve the `public` directory as your web root so requests are handled by `public/index.php`.
 4. (Optional) Run `npm install` and `node server.js` to start the Node server.
 
 ## Customization
@@ -33,5 +33,6 @@ setting `enable_recaptcha` to `true` and providing your site and secret keys.
 - `/login` – Login page
 - `/register` – Registration page
 - `/dashboard` – Protected user dashboard
+- `/profile/{id}` – Public user profile by ID
 
 Enjoy building with UserCandy!

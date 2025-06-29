@@ -14,6 +14,13 @@ function get_user_by_email($email) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function get_user_by_id($id) {
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM users WHERE id = ?');
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 function login_user($user) {
     $_SESSION['user_id'] = $user['id'];
 }
