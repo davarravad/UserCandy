@@ -18,9 +18,9 @@ if (!$profileUser) {
 ?>
 <?php
 $meta['title'] = 'Profile';
-include __DIR__ . '/../templates/header.php';
+render_header();
 ?>
 <h1 class="text-2xl font-bold mb-4">Profile for <?php echo htmlspecialchars($profileUser['email']); ?></h1>
 <p>User ID: <?php echo $profileUser['id']; ?></p>
-<?php include __DIR__ . '/../templates/footer.php';
+<?php render_footer();
 return; ?>

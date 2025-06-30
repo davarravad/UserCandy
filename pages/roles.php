@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $roles = get_roles();
 $meta['title'] = 'Roles';
-include __DIR__ . '/../templates/header.php';
+render_header();
 ?>
 <h1 class="text-2xl font-bold mb-4">Manage Roles</h1>
 <?php $flash = get_flash('success'); if ($flash): ?>
@@ -51,4 +51,4 @@ include __DIR__ . '/../templates/header.php';
     <input type="text" name="name" class="border p-1" required>
     <button type="submit" name="add" class="bg-blue-500 text-white px-2 py-1">Add</button>
 </form>
-<?php include __DIR__ . '/../templates/footer.php'; return; ?>
+<?php render_footer(); return; ?>

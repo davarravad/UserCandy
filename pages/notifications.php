@@ -9,7 +9,7 @@ if (isset($_GET['mark_all'])) {
     exit;
 }
 $meta['title'] = 'Notifications';
-include __DIR__ . '/../templates/header.php';
+render_header();
 ?>
 <h1 class="text-2xl font-bold mb-4">Notifications</h1>
 <?php $notifs = get_notifications(); if (!$notifs): ?>
@@ -27,6 +27,6 @@ include __DIR__ . '/../templates/header.php';
 <a class="text-blue-700" href="?mark_all=1">Mark all read</a>
 <?php endif; ?>
 <?php
-include __DIR__ . '/../templates/footer.php';
+render_footer();
 return;
 ?>

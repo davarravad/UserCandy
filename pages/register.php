@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php
 $meta['title'] = 'Register';
-include __DIR__ . '/../templates/header.php';
+render_header();
 ?>
 <h1 class="text-2xl font-bold mb-4">Register</h1>
 <?php if (!empty($error)) echo '<p class="text-red-500">' . $error . '</p>'; ?>
@@ -38,5 +38,5 @@ include __DIR__ . '/../templates/header.php';
     <button type="submit" class="bg-blue-500 text-white px-2 py-1">Register</button>
 </form>
 <p><a class="text-blue-700" href="<?php echo base_url('login'); ?>">Login</a></p>
-<?php include __DIR__ . '/../templates/footer.php';
+<?php render_footer();
 return; ?>

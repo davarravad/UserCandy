@@ -91,6 +91,12 @@ $config = require $configPath;
 // Provide sane defaults if optional keys are missing
 $config['language'] = $config['language'] ?? 'en';
 $config['available_languages'] = $config['available_languages'] ?? ['en'];
+$config['template'] = $config['template'] ?? 'default';
+$config['nav_links'] = $config['nav_links'] ?? [
+    ['title' => 'home', 'url' => ''],
+    ['title' => 'about', 'url' => 'about'],
+    ['title' => 'contact', 'url' => 'contact'],
+];
 
 // Language loading
 $langCode = $_GET['lang'] ?? $_SESSION['lang'] ?? $config['language'];
@@ -147,4 +153,23 @@ foreach ($defaults as $p) {
     if (!file_exists($dest) && file_exists($src)) {
         @copy($src, $dest);
     }
+}
+
+function get_template_path($file) {
+    global $config, $meta;
+    $template = $meta['template'] ?? $config['template'];
+    $base = __DIR__ . '/../templates/';
+    if ($template !== 'default') {
+        $alt = $base . $template . '/' . $file;
+        if (file_exists($alt)) return $alt;
+    }
+    return $base . $file;
+}
+
+function render_header() {
+    include get_template_path('header.php');
+}
+
+function render_footer() {
+    include get_template_path('footer.php');
 }
