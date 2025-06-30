@@ -40,6 +40,15 @@ function logout_user() {
     session_destroy();
 }
 
+function require_login() {
+    $user = current_user();
+    if (!$user) {
+        header('Location: ' . base_url('login'));
+        exit;
+    }
+    return $user;
+}
+
 function require_role($roles) {
     $user = current_user();
     if (!$user) {

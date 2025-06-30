@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../core/init.php';
+<?php require_once __DIR__ . '/../core/init.php';
 $meta['title'] = 'Home';
 render_header();
 ?>

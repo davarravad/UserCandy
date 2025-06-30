@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../core/auth.php';
-$user = require_role('member');
+$user = require_login();
 if (isset($_GET['mark_all'])) {
     foreach (get_notifications() as $nid => $_) {
         mark_notification_read($nid);

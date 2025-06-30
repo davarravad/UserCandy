@@ -1,6 +1,6 @@
 <?php
 $pathPrefix = __DIR__ . '/../../';
-include $pathPrefix . 'core/init.php';
+require_once $pathPrefix . 'core/init.php';
 $meta['title'] = 'Home';
 render_header();
 ?>

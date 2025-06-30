@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../core/auth.php';
-$user = require_role('member');
+$user = require_login();
 add_notification('Visit your profile', base_url('profile/' . $user['id']));
 ?>
 <?php
