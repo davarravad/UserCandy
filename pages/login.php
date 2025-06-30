@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_POST['remember'])) {
                 setcookie(session_name(), session_id(), time() + 60 * 60 * 24 * 30, '/');
             }
+            set_flash('success', 'Logged in');
             header('Location: ' . base_url('dashboard'));
             exit;
         } else {
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php
 $meta['title'] = 'Login';
-include __DIR__ . '/../templates/header.php';
+render_header();
 ?>
 <?php $flash = get_flash('success'); if ($flash): ?>
 <script>$(function(){ showPopup('<?php echo addslashes($flash); ?>', 'success'); });</script>
@@ -65,5 +66,5 @@ document.querySelector('form').addEventListener('submit', function(e) {
     }
 });
 </script>
-<?php include __DIR__ . '/../templates/footer.php';
+<?php render_footer();
 return; ?>

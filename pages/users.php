@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../core/auth.php';
 $user = require_role(['staff','admin']);
 $meta['title'] = 'Users';
-include __DIR__ . '/../templates/header.php';
+render_header();
 ?>
 <h1 class="text-2xl font-bold mb-4">Users</h1>
 <div id="loading" class="mb-2">Loading...</div>
@@ -12,5 +12,5 @@ include __DIR__ . '/../templates/header.php';
   </thead>
   <tbody></tbody>
 </table>
-<?php include __DIR__ . '/../templates/footer.php';
+<?php render_footer();
 return; ?>

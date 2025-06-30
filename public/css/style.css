@@ -1,4 +1,4 @@
-body { font-family: Arial, sans-serif; margin: 20px; }
+body { font-family: Arial, sans-serif; margin: 0; }
 h1 { color: #333; }
 html.dark body {
     background-color: #1a202c;

@@ -3,8 +3,10 @@ require_once __DIR__ . '/init.php';
 
 function register_user($email, $password, $role = 'member') {
     global $db;
+    $count = $db->query('SELECT COUNT(*) FROM users')->fetchColumn();
+    $roleToUse = $count == 0 ? 'admin' : $role;
     $stmt = $db->prepare('INSERT INTO users (email, password, role) VALUES (?, ?, ?)');
-    return $stmt->execute([$email, password_hash($password, PASSWORD_DEFAULT), $role]);
+    return $stmt->execute([$email, password_hash($password, PASSWORD_DEFAULT), $roleToUse]);
 }
 
 function get_user_by_email($email) {

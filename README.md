@@ -29,12 +29,28 @@ UserCandy is a simple PHP/MySQL website framework. It provides a basic login sys
    ```
 3. Serve the `public` directory as your web root so requests are handled by `public/index.php`.
 
+### Web server configuration
+For Apache you can set the `DocumentRoot` to the `public` folder:
+
+```apache
+<VirtualHost *:80>
+    DocumentRoot /path/to/UserCandy/public
+    <Directory /path/to/UserCandy/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+The same idea works with other web servers (nginx, etc.) – just point the server root to `public` so all requests go through `public/index.php`.
+
 If `app/config.php` is missing, the framework will display a setup message instead of crashing.
 
 ## Customization
 Add or modify pages in the `app/pages` directory. Files in this folder override files in `pages` with the same name, allowing upgrades without overwriting custom code.
 The templates in the `templates` directory load a header and footer using Tailwind CSS for styling.
 The footer text and other common labels come from the language files so they can be translated easily.
+You can create additional template folders (e.g. `templates/simple`) and set the active template in `app/config.php` using the `template` option. Individual pages may also override the template by setting `$meta['template']` before calling `render_header()`. 
 On first run the `home.php`, `about.php` and `contact.php` pages are automatically copied into `app/pages` so you can edit them without touching the core folder.
 
 ## OAuth Login

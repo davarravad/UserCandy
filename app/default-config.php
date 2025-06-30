@@ -31,4 +31,14 @@ return [
         'en','de','zh','hi','es','fr','ar','bn','ru','pt',
         'id','ur','ja','sw','mr','te','tr','ta','vi','ko'
     ],
+
+    // Default template directory inside templates/
+    'template' => 'default',
+
+    // Navigation links shown in the header
+    'nav_links' => [
+        ['title' => 'home', 'url' => ''],
+        ['title' => 'about', 'url' => 'about'],
+        ['title' => 'contact', 'url' => 'contact'],
+    ],
 ];

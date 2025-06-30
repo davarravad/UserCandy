@@ -5,10 +5,14 @@ add_notification('Visit your profile', base_url('profile/' . $user['id']));
 ?>
 <?php
 $meta['title'] = 'Dashboard';
-include __DIR__ . '/../templates/header.php';
+render_header();
+?>
+<?php $flash = get_flash('success'); if ($flash): ?>
+<script>$(function(){ showPopup('<?php echo addslashes($flash); ?>','success'); });</script>
+<?php endif; ?>
 ?>
 <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
 <p>Welcome <?php echo htmlspecialchars($user['email']); ?>!</p>
 <p><a class="text-blue-700" href="<?php echo base_url('logout'); ?>">Logout</a></p>
-<?php include __DIR__ . '/../templates/footer.php';
+<?php render_footer();
 return; ?>
