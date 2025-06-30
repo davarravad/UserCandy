@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../core/auth.php';
-$user = require_role('member');
+$user = require_login();
 $meta['title'] = 'Account';
 render_header();
 ?>

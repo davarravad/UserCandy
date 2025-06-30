@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/init.php';
 $provider = $_GET['provider'] ?? '';
-if (!in_array($provider, ['google', 'discord', 'windows'])) {
+if (!in_array($provider, ['google', 'discord', 'windows', 'facebook'])) {
     exit('Unknown provider');
 }
 if (!isset($_GET['state']) || $_GET['state'] !== ($_SESSION['oauth_state'] ?? '')) {

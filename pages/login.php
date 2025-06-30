@@ -33,19 +33,27 @@ render_header();
 <?php $flash = get_flash('success'); if ($flash): ?>
 <script>$(function(){ showPopup('<?php echo addslashes($flash); ?>', 'success'); });</script>
 <?php endif; ?>
-<h1 class="text-2xl font-bold mb-4">Login</h1>
-<?php if (!empty($error)) echo '<p class="text-red-500">' . $error . '</p>'; ?>
-<form method="post" class="space-y-2">
+<h1 class="text-2xl font-bold mb-4 text-center">Login</h1>
+<?php if (!empty($error)) echo '<p class="text-red-500 text-center">' . $error . '</p>'; ?>
+<div class="max-w-sm mx-auto p-6 bg-white dark:bg-gray-800 rounded shadow">
+<form method="post" class="space-y-3">
     <input type="text" name="honeypot" style="display:none" autocomplete="off">
-    <input type="email" name="email" placeholder="Email" required class="border p-1">
-    <input type="password" name="password" placeholder="Password" required class="border p-1">
+    <div class="flex items-center border rounded px-2 py-1">
+        <span class="mr-2">&#9993;</span>
+        <input type="email" name="email" placeholder="Email" required class="flex-grow focus:outline-none bg-transparent">
+    </div>
+    <div class="flex items-center border rounded px-2 py-1">
+        <span class="mr-2">&#128274;</span>
+        <input type="password" name="password" placeholder="Password" required class="flex-grow focus:outline-none bg-transparent">
+    </div>
     <label class="block"><input type="checkbox" name="remember" id="remember"> Remember me</label>
-    <?php if ($config['enable_recaptcha'] && !($config['enable_google_login'] || $config['enable_discord_login'] || $config['enable_windows_login'])): ?>
+    <?php if ($config['enable_recaptcha'] && !($config['enable_google_login'] || $config['enable_discord_login'] || $config['enable_windows_login'] || $config['enable_facebook_login'])): ?>
         <div class="g-recaptcha" data-sitekey="<?php echo $config['recaptcha_site_key']; ?>"></div>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <?php endif; ?>
-    <button type="submit" class="bg-blue-500 text-white px-2 py-1">Login</button>
+    <button type="submit" class="bg-blue-500 text-white px-2 py-1 w-full">Login</button>
 </form>
+</div>
 <p><a class="text-blue-700" href="<?php echo base_url('register'); ?>">Register</a></p>
 <?php if ($config['enable_google_login']): ?>
 <a class="text-blue-700" href="<?php echo base_url('oauth/google.php'); ?>">Login with Google</a>
@@ -56,13 +64,13 @@ render_header();
 <?php if ($config['enable_windows_login']): ?>
 <a class="text-blue-700" href="<?php echo base_url('oauth/windows.php'); ?>">Login with Windows</a>
 <?php endif; ?>
+<?php if ($config['enable_facebook_login']): ?>
+<a class="text-blue-700" href="<?php echo base_url('oauth/facebook.php'); ?>">Login with Facebook</a>
+<?php endif; ?>
 <script>
-document.querySelector('form').addEventListener('submit', function(e) {
-    var cb = document.getElementById('remember');
-    if (cb.checked) {
-        if (!confirm('Stay logged in on this device?')) {
-            cb.checked = false;
-        }
+document.getElementById('remember').addEventListener('change', function(){
+    if(this.checked && !confirm('Stay logged in on this device?')){
+        this.checked = false;
     }
 });
 </script>

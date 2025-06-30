@@ -19,6 +19,9 @@ return [
     'enable_windows_login' => false,
     'windows_client_id' => '',
     'windows_client_secret' => '',
+    'enable_facebook_login' => false,
+    'facebook_client_id' => '',
+    'facebook_client_secret' => '',
     // Enable Google reCAPTCHA on login and register forms
     'enable_recaptcha' => false,
     'recaptcha_site_key' => '',
