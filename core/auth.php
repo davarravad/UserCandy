@@ -98,3 +98,21 @@ function verify_recaptcha($response) {
     $result = json_decode($verify, true);
     return !empty($result['success']);
 }
+
+function get_roles() {
+    global $db;
+    $stmt = $db->query('SELECT id, name, is_default FROM roles ORDER BY id');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function add_role($name) {
+    global $db;
+    $stmt = $db->prepare('INSERT INTO roles (name) VALUES (?)');
+    return $stmt->execute([$name]);
+}
+
+function update_role($id, $name) {
+    global $db;
+    $stmt = $db->prepare('UPDATE roles SET name = ? WHERE id = ? AND is_default = 0');
+    return $stmt->execute([$name, $id]);
+}

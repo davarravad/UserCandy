@@ -129,8 +129,22 @@ if (!function_exists('base_url')) {
 }
 
 if (!function_exists('__')) {
-    function __($key) {
-        global $lang;
-        return $lang[$key] ?? $key;
+function __($key) {
+    global $lang;
+    return $lang[$key] ?? $key;
+}
+}
+
+// Auto copy editable default pages
+$appPagesDir = __DIR__ . '/../app/pages';
+if (!is_dir($appPagesDir)) {
+    @mkdir($appPagesDir, 0755, true);
+}
+$defaults = ['home', 'about', 'contact'];
+foreach ($defaults as $p) {
+    $src = __DIR__ . '/../pages/' . $p . '.php';
+    $dest = $appPagesDir . '/' . $p . '.php';
+    if (!file_exists($dest) && file_exists($src)) {
+        @copy($src, $dest);
     }
 }

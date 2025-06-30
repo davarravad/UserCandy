@@ -1,4 +1,7 @@
 <?php
+if (!function_exists('current_user')) {
+    require_once __DIR__ . '/../core/auth.php';
+}
 if (!isset($meta['title'])) { $meta['title'] = 'UserCandy'; }
 ?>
 <!DOCTYPE html>
