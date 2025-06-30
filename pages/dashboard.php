@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../core/auth.php';
-$user = current_user();
-if (!$user) {
-    header('Location: ' . base_url('login'));
-    exit;
-}
+$user = require_role('member');
 add_notification('Visit your profile', base_url('profile/' . $user['id']));
 ?>
 <?php

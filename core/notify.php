@@ -30,6 +30,12 @@ function mark_notification_read($id) {
     }
 }
 
+function mark_all_notifications_read() {
+    foreach (array_keys($_SESSION['uc_notifications']) as $id) {
+        $_SESSION['uc_notifications'][$id]['read'] = true;
+    }
+}
+
 function set_flash($type, $message) {
     $_SESSION['uc_flash'][$type] = $message;
 }
@@ -46,4 +52,7 @@ function get_flash($type) {
 // Mark notification read if notify parameter provided
 if (isset($_GET['notify'])) {
     mark_notification_read($_GET['notify']);
+}
+if (isset($_GET['mark_all'])) {
+    mark_all_notifications_read();
 }

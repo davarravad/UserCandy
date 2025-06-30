@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/init.php';
 
-function register_user($email, $password) {
+function register_user($email, $password, $role = 'member') {
     global $db;
-    $stmt = $db->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
-    return $stmt->execute([$email, password_hash($password, PASSWORD_DEFAULT)]);
+    $stmt = $db->prepare('INSERT INTO users (email, password, role) VALUES (?, ?, ?)');
+    return $stmt->execute([$email, password_hash($password, PASSWORD_DEFAULT), $role]);
 }
 
 function get_user_by_email($email) {
@@ -36,6 +36,21 @@ function current_user() {
 function logout_user() {
     unset($_SESSION['user_id']);
     session_destroy();
+}
+
+function require_role($roles) {
+    $user = current_user();
+    if (!$user) {
+        header('Location: ' . base_url('login'));
+        exit;
+    }
+    $roles = (array)$roles;
+    if (!in_array($user['role'] ?? 'guest', $roles)) {
+        http_response_code(403);
+        echo 'Forbidden';
+        exit;
+    }
+    return $user;
 }
 
 function request_from_same_site() {
