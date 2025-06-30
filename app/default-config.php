@@ -26,5 +26,9 @@ return [
 
     // Language settings
     'language' => 'en', // default language code
-    'available_languages' => ['en', 'de'],
+    // Available translations included in languages/
+    'available_languages' => [
+        'en','de','zh','hi','es','fr','ar','bn','ru','pt',
+        'id','ur','ja','sw','mr','te','tr','ta','vi','ko'
+    ],
 ];

@@ -11,10 +11,10 @@ window.showPopup = function(message, type){
 function toggleTheme(){
   if($('html').hasClass('dark')){
     $('html').removeClass('dark');
-    $('#theme-toggle').html('&#9728;');
+    $('#theme-toggle').html('&#9790;');
   }else{
     $('html').addClass('dark');
-    $('#theme-toggle').html('&#9790;');
+    $('#theme-toggle').html('&#9728;');
   }
   localStorage.setItem('uc_theme', $('html').hasClass('dark') ? 'dark' : 'light');
 }
@@ -22,6 +22,8 @@ function toggleTheme(){
 $(function(){
   if(localStorage.getItem('uc_theme') === 'dark'){
     $('html').addClass('dark');
+    $('#theme-toggle').html('&#9728;');
+  } else {
     $('#theme-toggle').html('&#9790;');
   }
   $('#theme-toggle').on('click', toggleTheme);
