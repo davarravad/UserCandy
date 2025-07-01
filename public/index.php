@@ -21,8 +21,14 @@ if (file_exists(SYSTEMDIR.'autoloader.php')) {
 }
 
 /* Load the Site Config */
-require(SYSTEMDIR.'Config.php');
-new Config();
+if (file_exists(SYSTEMDIR.'Config.php')) {
+    require SYSTEMDIR.'Config.php';
+    new Config();
+} else {
+    echo "<h1>Configuration Required</h1>";
+    echo "<p>Please rename or copy " . SYSTEMDIR . "Config-Example.php to Config.php and update your settings.</p>";
+    exit;
+}
 
 date_default_timezone_set(TIMEZONE);
 
