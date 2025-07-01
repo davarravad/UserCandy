@@ -107,34 +107,6 @@ CREATE TABLE `uc_sessions` (
   `ip` varchar(39) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `uc_sessions`
---
-
-INSERT INTO `uc_sessions` (`id`, `uid`, `username`, `hash`, `expiredate`, `ip`) VALUES
-(8, 1, 'david.sargent@ventureexpress.c', 'a4479b9060187895f21f91d968736fc5', '2025-05-22 10:10:55', '174.229.21.94'),
-(9, 1, 'david.sargent@ventureexpress.c', 'ddd1ae58a65de58a6348a8547a77639b', '2025-05-23 10:16:07', '174.229.21.94'),
-(10, 1, 'david.sargent@ventureexpress.c', '2c7a9bcb59aeef417763a9b173ea782a', '2025-05-28 07:31:41', '174.229.21.94'),
-(11, 1, 'david.sargent@ventureexpress.c', '3abe833b07c2c65fed8f06e4343b1d48', '2025-05-29 14:17:48', '174.229.21.94'),
-(12, 1, 'david.sargent@ventureexpress.c', '43bbc88bce6fdba92846f84555b3c73c', '2025-06-03 09:19:41', '174.229.21.94'),
-(13, 1, 'david.sargent@ventureexpress.c', '71ca017c43828b57dd66489d3a3c23f9', '2025-06-04 10:35:55', '174.229.21.94'),
-(14, 1, 'david.sargent@ventureexpress.c', '27b44f39b46b5be0a9e04836150b8e9f', '2025-06-05 13:23:33', '174.229.21.94'),
-(15, 1, 'david.sargent@ventureexpress.c', '97a4afedece267251b805214c84b76e3', '2025-06-07 08:53:03', '174.229.21.94'),
-(16, 1, 'david.sargent@ventureexpress.c', 'd5d05c0aec078ed422bb36d5b9dd8030', '2025-06-10 08:07:43', '174.229.21.94'),
-(17, 1, 'david.sargent@ventureexpress.c', '1a8040b75d758af09e9da528792de9b5', '2025-06-10 09:30:21', '174.229.21.94'),
-(18, 1, 'david.sargent@ventureexpress.c', '141545335281775e22cc4ac5a0c46188', '2025-06-10 10:00:17', '174.229.21.94'),
-(19, 1, 'david.sargent@ventureexpress.c', '0a1533e8970f06a6e44fc265c1828dfe', '2025-06-10 18:20:55', '173.31.4.161'),
-(20, 1, 'david.sargent@ventureexpress.c', '626bc9d26d31b9edaf3fff5b71a6cc4e', '2025-06-10 18:52:34', '173.31.4.161'),
-(21, 1, 'david.sargent@ventureexpress.c', 'd580bcbfc82a1b78df42b1d9e777e2ea', '2025-06-11 08:05:19', '174.229.21.94'),
-(22, 1, 'david.sargent@ventureexpress.c', 'e872bc3986e26ecb3418c8a8918abac2', '2025-06-18 07:18:29', '174.229.21.181'),
-(23, 1, 'david.sargent@ventureexpress.c', '4880b0c2c67354dc4fea2d89da98cb7f', '2025-06-20 07:18:13', '174.229.21.181'),
-(24, 1, 'david.sargent@ventureexpress.c', '50eaa22459b40caf39977831ba5e53e5', '2025-06-21 11:58:12', '174.229.21.181'),
-(25, 1, 'david.sargent@ventureexpress.c', '5683a743e74a5114a08958dd70dd3978', '2025-06-24 07:24:04', '174.229.21.181'),
-(26, 1, 'david.sargent@ventureexpress.c', '55c0ba2effef83851e0fd964b38cc9bb', '2025-06-25 10:04:43', '174.229.21.181'),
-(27, 1, 'david.sargent@ventureexpress.c', 'debc3cd321a63214b94eab8deeb67fa8', '2025-06-26 12:58:31', '174.229.21.181'),
-(28, 1, 'david.sargent@ventureexpress.c', '654277de6adfa3ee3b3ec0812c453d9f', '2025-06-28 06:53:05', '174.229.21.181'),
-(29, 1, 'david.sargent@ventureexpress.c', '298b0a881338b506e729c11c2d682f80', '2025-07-01 13:18:42', '174.218.49.208');
-
 -- --------------------------------------------------------
 
 --
