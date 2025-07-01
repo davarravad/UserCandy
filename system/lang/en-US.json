@@ -1,7 +1,7 @@
 {
-    "SITE_TITLE": "Sargent Dispatch",
-    "SITE_DESCRIPTION": "Welcome to Sargent Dispatch!",
-    "SITE_KEYWORDS": "Venture, Trailers",
+    "SITE_TITLE": "UserCandy",
+    "SITE_DESCRIPTION": "Welcome to UserCandy!",
+    "SITE_KEYWORDS": "UserCandy, PHP, mySQL, framework, website.",
 
     "NOT_LOGGED_IN": "You Must Be Logged In to View That Page!",
     "NOT_ADMIN": "You Must Be Admin to View That Page!",
@@ -13,7 +13,7 @@
     "NAV_ADMIN_PANEL": "Admin Panel",
 
     "ACCOUNT_ACCOUNT": "Account",
-    "ACCOUNT_TITLE": "Sargent Dispatch - Account",
+    "ACCOUNT_TITLE": "UserCandy - Account",
     "ACCOUNT_NOTIFICATIONS": "Notifications",
     "ACCOUNT_USERNAME": "Username",
     "ACCOUNT_DISCORD_ID": "Discord Id",
@@ -22,7 +22,7 @@
     "ACCOUNT_SIGN_UP_DATE": "Sign Up Date",
     "ACCOUNT_ROLES": "Roles",
 
-    "ADMIN_TITLE": "Sargent Dispatch - Admin Panel",
+    "ADMIN_TITLE": "UserCandy - Admin Panel",
     "ADMIN_MAIN": "Admin",
     "ADMIN_ROLES": "Roles",
     "ADMIN_WELCOME": "Welcome to the Admin section of the website.",

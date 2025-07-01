@@ -71,7 +71,7 @@ if(!empty($uid) && ($authHelper->hasRole($uid,"1") || $authHelper->hasRole($uid,
 
 <main class="container-fluid">
   <div class="uc-card p-5 rounded">
-    <h1>Welcome to Sargent Dispatch</h1>
+    <h1>Welcome to UserCandy</h1>
     <p class="lead">Please Login to continue.</p>
   </div>
 </main>

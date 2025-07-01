@@ -10,7 +10,7 @@
 
     <nav class="navbar bg-dark fixed-bottom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Sargent Dispatch</a>
+            <a class="navbar-brand" href="#">UserCandy</a>
         </div>
     </nav>
 

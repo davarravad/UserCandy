@@ -10,8 +10,8 @@
 use Core\{Header,Footer};
 
 // Set the shared data for this page.
-$metaData['title'] = "Sargent Dispatch";
-$metaData['description'] = "Welcome to Sargent Dispatch!";
+$metaData['title'] = "UserCandy";
+$metaData['description'] = "Welcome to UserCandy!";
 
 // Load the Header
 Header::load($metaData);

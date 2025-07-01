@@ -781,7 +781,7 @@ class PageFunctions {
 					// 	$html_data .= " <br> ";
 					// 	$html_data .= "<a href='".SITE_URL."Privacy'>".Lang::get("",'privacy_title')."</a>";
 					// }
-          $html_data .= "david.sargent@ventureexpress.com";
+          $html_data .= SITE_EMAIL;
 					$html_data .= "</center>
 					</body>
 			</html>
