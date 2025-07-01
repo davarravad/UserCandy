@@ -101,6 +101,9 @@ class Config {
          *                *
          *****************/
         // Account needs email activation, false=no true=yes
+        // NOTE: If enabled, the email configuration values below must be
+        // changed from their defaults or activation will automatically be
+        // disabled at runtime.
         define("ACCOUNT_ACTIVATION", 'false');
         // Max attempts for login before user is locked out
         define("MAX_ATTEMPTS", '5');
