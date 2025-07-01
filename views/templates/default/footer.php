@@ -16,7 +16,7 @@
 
     <script src="<?=SITE_URL?>templates/default/assets/js/popper.min.js"></script>
     <script src="<?=SITE_URL?>templates/default/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=SITE_URL?>templates/default/assets/js/jquery-3.6.1.min.js"></script>
+    <script src="<?=SITE_URL?>templates/default/assets/js/jquery-3.7.1.min.js"></script>
     <script src="<?=SITE_URL?>templates/default/assets/js/select2.min.js"></script>
     <script type='text/javascript'>
         $(document).ready(function(){

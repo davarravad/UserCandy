@@ -101,7 +101,7 @@ class Config {
          *                *
          *****************/
         // Account needs email activation, false=no true=yes
-        define("ACCOUNT_ACTIVATION", 'true');
+        define("ACCOUNT_ACTIVATION", 'false');
         // Max attempts for login before user is locked out
         define("MAX_ATTEMPTS", '5');
         // How long a user is locked out after they reach the max attempts
