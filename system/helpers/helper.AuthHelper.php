@@ -461,6 +461,25 @@ class AuthHelper
                         /** Check to see if Account Activation is required **/
                         $account_activation = ACCOUNT_ACTIVATION;
                         if ($account_activation == "true") {
+                            /**
+                             * Ensure email configuration is properly set.  If
+                             * any of the email related configuration values
+                             * remain at their default placeholders then
+                             * disable account activation so the user can still
+                             * register.
+                             */
+                            $email_defaults = [
+                                EMAIL_FROM_NAME === 'email_from_name',
+                                EMAIL_HOST === 'email_host',
+                                EMAIL_PASSWORD === 'email_password',
+                                SITE_EMAIL === 'email_site'
+                            ];
+                            if (in_array(true, $email_defaults, true)) {
+                                $account_activation = "false";
+                            }
+                        }
+
+                        if ($account_activation == "true") {
                             /** Check if Email Settings are set **/
                             $site_mail_setting = EMAIL_FROM_NAME;
                             if (!empty($site_mail_setting)) {
