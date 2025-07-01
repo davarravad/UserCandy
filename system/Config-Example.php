@@ -12,6 +12,7 @@ class Config {
     public function __construct() {
       /* Enable output buffering */
       ob_start();
+
   
       /********************
        *                  *
@@ -29,9 +30,17 @@ class Config {
   
       /* Default Language Code */
       define('LANGUAGE_CODE', 'En');
+
+      /* Default Timezone */
+      define('TIMEZONE', 'America/Chicago');
   
       /* Default Session Prefix */
       define('SESSION_PREFIX', 'uc_');
+
+      /* Cookie Settings */
+      define('COOKIE_SECURE', true);
+      define('COOKIE_HTTPONLY', true);
+      define('COOKIE_SAMESITE', 'Lax');
 
       /* Default User Role Assigned to all new members. */
       define('DEFAULT_ROLE_ID', '2');

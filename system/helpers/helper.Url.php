@@ -66,7 +66,7 @@ class Url
      */
     public static function profileImageURL($image = null)
     {
-        return SITE_URL .'assats/images/profile-pics/'.$image;
+        return SITE_URL .'assets/images/profile-pics/'.$image;
     }
     /**
      * Created the absolute address to the template folder.
