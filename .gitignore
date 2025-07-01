@@ -1,5 +1,1 @@
-# Ignore local configuration
-app/config.php
-
-# Log files
-logs/*.log
+system/Config.php

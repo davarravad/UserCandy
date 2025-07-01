@@ -1,0 +1,78 @@
+body {
+  padding-top: 90px;
+  /* Margin bottom by footer height */
+  margin-bottom: 90px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background-color: rgb(176, 197, 178);
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display:none;
+  visibility:hidden;
+}
+
+.form {
+	white-space: pre-line;
+	display: block;
+	unicode-bidi: embed;
+}
+
+.table>:not(caption)>*>* {
+    padding: 0.1rem 0.1rem;
+}
+
+.navbar {
+  border-bottom: solid 2px #ffffff5e;
+}
+
+.notification {
+  border-left-width: 5px;
+  border-right-width: 5px;
+}
+
+.trailer-pin {
+  color: rgb(255,255,255);
+  font-weight: bold;
+  padding: 3px;
+  text-align-last: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  margin-top: -33px;
+}
+
+.trailer-pin-start {
+  border: solid 2px rgb(0,0,0);
+  background-color: rgba(89, 197, 62, 0.93);
+}
+
+.trailer-pin-mid {
+  border: solid 2px rgb(0,0,0);
+  background-color: rgb(62 125 197 / 93%);
+}
+
+.trailer-pin-end {
+  border: solid 2px rgb(0,0,0);
+  background-color: rgba(197, 62, 62, 0.93);
+}
+
+.trailer-pin::after {
+    content:'';
+    position: absolute;
+    right: 0;
+    margin-top: 19px;
+    width: 0;
+    height: 0;
+    transform: translateX(-50%);
+    left: 50%;
+    border-top: 8px solid #000000;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
