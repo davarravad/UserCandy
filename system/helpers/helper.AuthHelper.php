@@ -129,6 +129,9 @@ class AuthHelper
                             } else {
                                 // Account is activated
                                 $this->newSession($userName, $remember); //generate new cookie session
+                                if (session_status() === PHP_SESSION_ACTIVE) {
+                                    session_regenerate_id(true);
+                                }
                                 $this->logActivity($userName, "AUTH_LOGIN_SUCCESS", "User logged in");
                                 $this->successmsg[] = $this->language->get($this->userLocale, 'login_success');
                                 return true;
@@ -158,6 +161,9 @@ class AuthHelper
         $auth_session = Cookie::get(SESSION_PREFIX . "auth_session");
         if ($auth_session != '') {
             $this->deleteSession($auth_session);
+        }
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
         }
         /** Clean offline users from DB */
         $user = new UsersModel();
@@ -200,7 +206,7 @@ class AuthHelper
             // Hash doesn't exist
             $this->errormsg[] = $this->language->get($this->userLocale, 'sessioninfo_invalid');
             //setcookie(SESSION_PREFIX."auth_session", $hash, time() - 3600, '/');
-            Cookie::destroy(SESSION_PREFIX . 'auth_session', $hash); //check if destroys deletes only a specific hash
+            Cookie::destroy(SESSION_PREFIX . 'auth_session');
             //   Cookie::set(SESSION_PREFIX."auth_session", $hash, time() - 3600, "/",$_SERVER["HTTP_HOST"]);
             return false;
         } else {
@@ -225,7 +231,7 @@ class AuthHelper
         $count = count($session);
         if ($count == 0) {
             //hash did not exists deleting cookie
-            Cookie::destroy(SESSION_PREFIX . "auth_session", $hash);
+            Cookie::destroy(SESSION_PREFIX . "auth_session");
             //Cookie::destroy(SESSION_PREFIX."auth_session", $hash, '');
             //setcookie(SESSION_PREFIX."auth_session", $hash, time() - 3600, "/");
             $this->logActivity('UNKNOWN', "AUTH_CHECKSESSION", "User session cookie deleted - Hash ({$hash}) didn't exist");
@@ -237,7 +243,7 @@ class AuthHelper
             if ($_SERVER['REMOTE_ADDR'] != $db_ip) {
                 //hash exists but ip is changed, delete session and hash
                 $this->authorize->deleteSession($userName);
-                Cookie::destroy(SESSION_PREFIX . "auth_session", $hash);
+                Cookie::destroy(SESSION_PREFIX . "auth_session");
                 //setcookie(SESSION_PREFIX."auth_session", $hash, time() - 3600, "/");
                 $this->logActivity($userName, "AUTH_CHECKSESSION", "User session cookie deleted - IP Different ( DB : {$db_ip} / Current : " . $_SERVER['REMOTE_ADDR'] . " )");
                 return false;
@@ -247,7 +253,7 @@ class AuthHelper
                 if ($currentdate > $expiredate) {
                     //session has expired delete session and cookies
                     $this->authorize->deleteSession($userName);
-                    Cookie::destroy(SESSION_PREFIX . "auth_session", $hash);
+                    Cookie::destroy(SESSION_PREFIX . "auth_session");
                     //setcookie(SESSION_PREFIX."auth_session", $hash, time() - 3600, "/");
                     $this->logActivity($userName, "AUTH_CHECKSESSION", "User session cookie deleted - Session expired ( Expire date : {$db_expiredate} )");
                 } else {
@@ -326,7 +332,11 @@ class AuthHelper
      */
     private function newSession($userName, $rememberMe)
     {
-        $hash = md5(microtime()); // unique session hash
+        if (function_exists('random_bytes')) {
+            $hash = bin2hex(random_bytes(32));
+        } else {
+            $hash = md5(uniqid((string)microtime(), true));
+        }
         // Fetch User ID :
         $queryUid = $this->authorize->getUserID($userName);
         $uid = $queryUid[0]->userId;
@@ -337,7 +347,7 @@ class AuthHelper
         $expiretime = strtotime($expiredate);
         $info = array("uid" => $uid, "userName" => $userName, "hash" => $hash, "expiredate" => $expiredate, "ip" => $ip);
         $this->authorize->addIntoDB("sessions", $info);
-        Cookie::set(SESSION_PREFIX . 'auth_session', $hash, $expiretime, "/", FALSE);
+        Cookie::set(SESSION_PREFIX . 'auth_session', $hash, $expiretime, '/', false, COOKIE_SECURE, COOKIE_HTTPONLY, COOKIE_SAMESITE);
     }
 
     /**
@@ -358,7 +368,7 @@ class AuthHelper
             // Hash exists, Delete all sessions for that userName :
             $this->authorize->deleteSession($userName);
             $this->logActivity($userName, "AUTH_LOGOUT", "User session cookie deleted - Database session deleted - Hash ({$hash})");
-            Cookie::destroy(SESSION_PREFIX . "auth_session", $hash);
+            Cookie::destroy(SESSION_PREFIX . "auth_session");
         }
     }
 
