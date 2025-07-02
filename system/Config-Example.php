@@ -37,8 +37,12 @@ class Config {
       /* Default Session Prefix */
       define('SESSION_PREFIX', 'uc_');
 
-      /* Cookie Settings */
-      define('COOKIE_SECURE', true);
+      /* Cookie Settings
+       * Set COOKIE_SECURE to true only when the site is served over HTTPS.
+       * Using true over plain HTTP prevents the browser from sending the
+       * session cookie and will cause logins to fail.
+       */
+      define('COOKIE_SECURE', false);
       define('COOKIE_HTTPONLY', true);
       define('COOKIE_SAMESITE', 'Lax');
 
