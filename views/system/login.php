@@ -31,7 +31,13 @@ use Models\{UsersModel};
             $username = $email && (count($email) != 0 ) ? $email[0]->userName : $username;
 
             if ($authHelper->login($username, $password, $rememberMe)) {
-                $userId = $authHelper->currentSessionInfo()['uid'];
+                $sessionInfo = $authHelper->currentSessionInfo();
+                if (is_array($sessionInfo) && isset($sessionInfo['uid'])) {
+                    $userId = $sessionInfo['uid'];
+                } else {
+                    // Fallback to fetching the user id from the database
+                    $userId = $usersModel->getUserID($username);
+                }
 
                 /** Update the last login timestamp for user to now **/
                 $info = array('LastLogin' => date('Y-m-d G:i:s'));
