@@ -32,11 +32,20 @@ if (file_exists(SYSTEMDIR.'Config.php')) {
 
 date_default_timezone_set(TIMEZONE);
 
+// Determine if cookies should be marked as secure.
+// If COOKIE_SECURE is enabled but HTTPS is not active, fall back to false so
+// the session cookie is still sent over HTTP. This prevents silent login
+// failures when the site has not yet been configured for HTTPS.
+$cookieSecure = COOKIE_SECURE;
+if ($cookieSecure && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off')) {
+    $cookieSecure = false;
+}
+
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
     'domain' => $_SERVER['HTTP_HOST'],
-    'secure' => COOKIE_SECURE,
+    'secure' => $cookieSecure,
     'httponly' => COOKIE_HTTPONLY,
     'samesite' => COOKIE_SAMESITE
 ]);
