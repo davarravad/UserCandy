@@ -44,7 +44,8 @@ if ($cookieSecure && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off')) 
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
-    'domain' => $_SERVER['HTTP_HOST'],
+    // Strip any port from host to ensure a valid cookie domain
+    'domain' => explode(':', $_SERVER['HTTP_HOST'])[0],
     'secure' => $cookieSecure,
     'httponly' => COOKIE_HTTPONLY,
     'samesite' => COOKIE_SAMESITE

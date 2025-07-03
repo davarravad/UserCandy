@@ -19,7 +19,8 @@ class Cookie {
         $retval = false;
         if (!headers_sent()) {
             if ($domain === false) {
-                $domain = $_SERVER['HTTP_HOST'];
+                // Strip port to avoid invalid cookie domain
+                $domain = explode(':', $_SERVER['HTTP_HOST'])[0];
             }
             $options = [
                 'expires' => $expiry,
@@ -48,7 +49,8 @@ class Cookie {
     public static function destroy($key, $value = '', $path = "/", $domain = '', $secure = false, $httponly = true, $samesite = 'Lax') {
         if (isset($_COOKIE[$key])) {
             if ($domain === '') {
-                $domain = $_SERVER['HTTP_HOST'];
+                // Strip port when defaulting domain to current host
+                $domain = explode(':', $_SERVER['HTTP_HOST'])[0];
             }
             unset($_COOKIE[$key]);
             setcookie($key, $value, [
