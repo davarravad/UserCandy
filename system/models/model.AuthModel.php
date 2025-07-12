@@ -242,13 +242,13 @@ class AuthModel extends Models
     }
 
     /**
-     * Gets session info by the hash
-     * @param $hash
+     * Gets session info by the session hash
+     * @param string $hash
      * @return array dataset
      */
     public function sessionInfo($hash)
     {
-        return $this->db->select("SELECT uid, userName, expiredate, ip FROM ".PREFIX."sessions WHERE hash=:hash", array(':hash' => $hash));
+        return $this->db->select("SELECT uid, userName, expiredate, ip, useragent FROM ".PREFIX."sessions WHERE hash=:hash", array(':hash' => $hash));
     }
 
     /**

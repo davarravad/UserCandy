@@ -194,12 +194,13 @@ class AuthHelper
     }
 
     /**
-     * Provides an associative array of user info based on session hash
-     * @param string $hash
+     * Provides an associative array of user info based on session token
+     * @param string $token
      * @return array $session
      */
-    private function sessionInfo($hash)
+    private function sessionInfo($token)
     {
+        $hash = hash('sha256', $token);
         $query = $this->authorize->sessionInfo($hash);
         $count = count($query);
         if ($count == 0) {
@@ -215,18 +216,19 @@ class AuthHelper
             $session["userName"] = $query[0]->userName;
             $session["expiredate"] = $query[0]->expiredate;
             $session["ip"] = $query[0]->ip;
+            $session["useragent"] = $query[0]->useragent ?? '';
             return $session;
         }
     }
 
     /**
-     * Checks if a hash session is valid on database
-     * @param string $hash
+     * Checks if a session token is valid in the database
+     * @param string $token
      * @return boolean
      */
-    private function sessionIsValid($hash)
+    private function sessionIsValid($token)
     {
-        //if hash in db
+        $hash = hash('sha256', $token);
         $session = $this->authorize->sessionInfo($hash);
         $count = count($session);
         if ($count == 0) {
@@ -240,12 +242,13 @@ class AuthHelper
             $userName = $session[0]->userName;
             $db_expiredate = $session[0]->expiredate;
             $db_ip = $session[0]->ip;
-            if ($_SERVER['REMOTE_ADDR'] != $db_ip) {
+            $db_agent = $session[0]->useragent ?? '';
+            if ($_SERVER['REMOTE_ADDR'] != $db_ip || !hash_equals($db_agent, hash('sha256', $_SERVER['HTTP_USER_AGENT'] ?? ''))) {
                 //hash exists but ip is changed, delete session and hash
                 $this->authorize->deleteSession($userName);
                 Cookie::destroy(SESSION_PREFIX . "auth_session");
                 //setcookie(SESSION_PREFIX."auth_session", $hash, time() - 3600, "/");
-                $this->logActivity($userName, "AUTH_CHECKSESSION", "User session cookie deleted - IP Different ( DB : {$db_ip} / Current : " . $_SERVER['REMOTE_ADDR'] . " )");
+                $this->logActivity($userName, "AUTH_CHECKSESSION", "User session cookie deleted - IP/UserAgent mismatch");
                 return false;
             } else {
                 $expiredate = strtotime($db_expiredate);
@@ -333,10 +336,12 @@ class AuthHelper
     private function newSession($userName, $rememberMe)
     {
         if (function_exists('random_bytes')) {
-            $hash = bin2hex(random_bytes(32));
+            $token = bin2hex(random_bytes(32));
         } else {
-            $hash = md5(uniqid((string)microtime(), true));
+            $token = md5(uniqid((string)microtime(), true));
         }
+        $hash = hash('sha256', $token);
+        $agent = hash('sha256', $_SERVER['HTTP_USER_AGENT'] ?? '');
         // Fetch User ID :
         $queryUid = $this->authorize->getUserID($userName);
         $uid = $queryUid[0]->userId;
@@ -345,7 +350,14 @@ class AuthHelper
         $ip = $_SERVER['REMOTE_ADDR'];
         $expiredate = $rememberMe ? date("Y-m-d H:i:s", strtotime(SESSION_DURATION_RM)) : date("Y-m-d H:i:s", strtotime(SESSION_DURATION));
         $expiretime = strtotime($expiredate);
-        $info = array("uid" => $uid, "userName" => $userName, "hash" => $hash, "expiredate" => $expiredate, "ip" => $ip);
+        $info = array(
+            "uid" => $uid,
+            "userName" => $userName,
+            "hash" => $hash,
+            "expiredate" => $expiredate,
+            "ip" => $ip,
+            "useragent" => $agent,
+        );
         $this->authorize->addIntoDB("sessions", $info);
 
         $cookieSecure = COOKIE_SECURE;
@@ -353,16 +365,16 @@ class AuthHelper
             $cookieSecure = false;
         }
 
-        Cookie::set(SESSION_PREFIX . 'auth_session', $hash, $expiretime, '/', false, $cookieSecure, COOKIE_HTTPONLY, COOKIE_SAMESITE);
+        Cookie::set(SESSION_PREFIX . 'auth_session', $token, $expiretime, '/', false, $cookieSecure, COOKIE_HTTPONLY, COOKIE_SAMESITE);
     }
 
     /**
-     * Deletes a session based on a hash
-     * @param string $hash
+     * Deletes a session based on a token
+     * @param string $token
      */
-    private function deleteSession($hash)
+    private function deleteSession($token)
     {
-
+        $hash = hash('sha256', $token);
         $query_userName = $this->authorize->sessionInfo($hash);
         $count = count($query_userName);
         if ($count == 0) {

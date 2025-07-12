@@ -32,6 +32,10 @@ if (file_exists(SYSTEMDIR.'Config.php')) {
 
 date_default_timezone_set(TIMEZONE);
 
+// Enforce strict session id mode and custom name
+ini_set('session.use_strict_mode', '1');
+session_name(SESSION_PREFIX . 'sid');
+
 // Determine if cookies should be marked as secure.
 // If COOKIE_SECURE is enabled but HTTPS is not active, fall back to false so
 // the session cookie is still sent over HTTP. This prevents silent login
