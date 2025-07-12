@@ -37,7 +37,7 @@ date_default_timezone_set(TIMEZONE);
 // the session cookie is still sent over HTTP. This prevents silent login
 // failures when the site has not yet been configured for HTTPS.
 $cookieSecure = COOKIE_SECURE;
-if ($cookieSecure && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off')) {
+if ($cookieSecure && !Helpers\Request::isSecure()) {
     $cookieSecure = false;
 }
 
