@@ -11,7 +11,7 @@
 namespace Helpers;
 
 use Core\{Cookie};
-use Helpers\{Popups, Lang, Mail, CurrentUserData};
+use Helpers\{Popups, Lang, Mail, CurrentUserData, Request};
 use Models\{AuthModel, UsersModel};
 
 class AuthHelper
@@ -347,7 +347,13 @@ class AuthHelper
         $expiretime = strtotime($expiredate);
         $info = array("uid" => $uid, "userName" => $userName, "hash" => $hash, "expiredate" => $expiredate, "ip" => $ip);
         $this->authorize->addIntoDB("sessions", $info);
-        Cookie::set(SESSION_PREFIX . 'auth_session', $hash, $expiretime, '/', false, COOKIE_SECURE, COOKIE_HTTPONLY, COOKIE_SAMESITE);
+
+        $cookieSecure = COOKIE_SECURE;
+        if ($cookieSecure && !Request::isSecure()) {
+            $cookieSecure = false;
+        }
+
+        Cookie::set(SESSION_PREFIX . 'auth_session', $hash, $expiretime, '/', false, $cookieSecure, COOKIE_HTTPONLY, COOKIE_SAMESITE);
     }
 
     /**

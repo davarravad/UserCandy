@@ -138,4 +138,22 @@ class Request
     {
         return $_SERVER["REQUEST_METHOD"] === "GET";
     }
+
+    /**
+     * Detect if the request uses HTTPS.
+     *
+     * @return boolean
+     */
+    public static function isSecure()
+    {
+        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+            return true;
+        }
+
+        if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            return $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https';
+        }
+
+        return false;
+    }
 }
