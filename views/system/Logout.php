@@ -15,4 +15,4 @@ if ($authHelper->isLogged()) {
     $authHelper->logout();
 }
 /** Success Message Display **/
-Popups::pushSuccess(Lang::get($userLocale,'logout' ), '');
+Popups::pushSuccess(Lang::get($userLocale,'logout' ), 'Login');
