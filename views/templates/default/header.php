@@ -8,7 +8,7 @@
 */
 
 use Helpers\{Request,Popups,Lang,Csrf,AuthHelper};
-use Models\{AuthModel,DispatchModel};
+use Models\{AuthModel};
 
 // Check to see if user is logged in
 $authHelper = new AuthHelper();
@@ -19,7 +19,6 @@ if($authHelper->isLogged()){
   // Load the auth model
   $authModel = new AuthModel();
   $userLocale = "";
-  $dispatchModel = new DispatchModel();
 }else{
   $userLocale = "";
 }
